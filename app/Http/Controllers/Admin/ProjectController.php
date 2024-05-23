@@ -97,10 +97,12 @@ class ProjectController extends Controller
 
         /* Validate */
 
+        //SLUG
         $validated = $request->validated();
         $slug = Str::slug($request->slug, '-');
         $validated['slug'] = $slug;
 
+        //COVER_IMAGE
         if ($request->has('cover_image')) {
             if ($project->cover_image) {
                 Storage::delete($project->cover_image);
@@ -111,6 +113,10 @@ class ProjectController extends Controller
         $validated['cover_image'] = $image_path;
         /* dd($validated); */
 
+
+        //TYPE
+        $validated['type_id'] = Auth::id();
+        //CONNECT Type_id (Foreign Key) to id on User Table
 
         /* Update */
         $project->update($validated);
