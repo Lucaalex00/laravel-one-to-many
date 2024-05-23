@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'slug', 'link', 'content', 'cover_image', 'video'];
+    protected $fillable = ['title', 'slug', 'link', 'content', 'cover_image', 'video', 'type_id', 'user_id'];
 
 
     /**

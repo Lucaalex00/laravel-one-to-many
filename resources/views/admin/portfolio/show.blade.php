@@ -17,9 +17,12 @@
     </header>
     <div class="container d-flex flex-column gap-2 my-4 text-light">
         <h3>Title: {{ $project->title }}</h3>
+
         <div>Slug: {{ $project->slug }}</div>
-        <div class="type">
-            <strong>Type: </strong> {{ $project->type ? $project->category->name : 'Untyped' }}
+
+        <div class="metadata">
+            <strong>Type: </strong> {{ $project->type ? $project->type->name : 'Untyped' }} <br>
+            <strong>Author : {{ $project->user ? $project->user->name : 'N/A' }}</strong> {{-- !!TODO --}}
         </div>
 
         <div class="container d-flex align-items-center gap-2 p-0 my-2">

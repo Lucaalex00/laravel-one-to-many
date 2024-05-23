@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->unsignedBigInteger('type_id')->after('id')->nullable();
-            $table->foreign('type_id')->references('id')->on('projects')->onDelete('set null');
+            $table->unsignedBigInteger('type_id')->nullable()->after('id');
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('set null');
 
             // TAKE 'projects' TABLE , insert 'type_id' like an 'foreign' key
             // 'project_type_id_foreign   <---- 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropForeign('project_type_id_foreign');
+            $table->dropForeign(['type_id']);
             $table->dropColumn('type_id');
         });
     }

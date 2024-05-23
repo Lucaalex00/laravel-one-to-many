@@ -9,7 +9,7 @@
 
             {{-- cover_image --}}
             <div class="mb-3 text-light">
-                <label for="link" class="form-label">cover_image</label>
+                <label for="link" class="form-label">Image</label>
                 <input type="file" class="form-control  @error('cover_image') is-invalid @enderror" name="cover_image"
                     id="cover_image" aria-describedby="helpId" placeholder="Type a cover_image" />
                 <small id="cover_imageId" class="form-text text-muted"></small>
@@ -19,15 +19,17 @@
             @enderror
 
             {{-- Type --}}
-            <div class="mb-3 text-light">
+            <div class="mb-5 text-light">
                 <label for="type" class="form-label">Type</label>
-                <input type="text" class="form-control  @error('type') is-invalid @enderror" name="type"
-                    id="type" aria-describedby="helpId" placeholder="Type a type" />
-                <small id="typeId" class="form-text text-muted">Type a.... ? Type</small>
+                <select class="form-select" name="type_id" id="type_id">
+                    <option selected disabled>Select a type</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" {{ $type->id == old('type_id') ? 'selected' : '' }}>
+                            {{ $type->name }}</option>
+                    @endforeach
+
+                </select>
             </div>
-            @error('type')
-                <h4 class="text-danger ">{{ $message }}</h4>
-            @enderror
 
             {{-- Title --}}
             <div class="mb-3 text-light">
@@ -44,10 +46,10 @@
             {{-- Slug --}}
             <div class="mb-3 text-light">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" value="{{ old('slug', $project->slug) }}"
+                <input disabled type="text" value="{{ old('slug', $project->slug) }}"
                     class="form-control  @error('slug') is-invalid @enderror" name="slug" id="slug"
-                    aria-describedby="helpId" placeholder="Type a slug" />
-                <small id="slugId" class="form-text text-muted">Type a Slug</small>
+                    aria-describedby="helpId" placeholder="Slug Auto-generated" />
+                <small id="slugId" class="form-text text-muted">Slug Auto-generated</small>
             </div>
             @error('slug')
                 <h4 class="text-danger ">{{ $message }}</h4>
