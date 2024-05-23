@@ -1,0 +1,32 @@
+@import '~bootstrap/scss/bootstrap';
+
+.table_container{
+    overflow-y: auto;
+    height: 520px;
+    scrollbar-width: thin;
+    scrollbar-color: black orange;
+    scroll-behavior: smooth;
+}
+.back_arrow_container{
+    font-size: 1.4rem;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 1s;
+    &:hover{
+        background-color: gray;
+        border: 1px solid black;
+        cursor: pointer;
+        >.back_arrow{
+            color: white;
+        }
+    }
+    >.back_arrow{
+        color: black;
+        transition: 1s;
+    }
+}
