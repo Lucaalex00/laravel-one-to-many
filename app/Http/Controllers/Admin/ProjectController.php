@@ -7,6 +7,7 @@ use App\Models\Type;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -36,7 +37,9 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        /* dd($request->all()); */
+        /* dd($request->all()); */ //CHECK REQUEST'S VALUE
+
+        /* dd(Auth()->user()); */ //CHECK WHO IS USER'S LOGGED IN
 
         /* Validate */
         $validated = $request->validated();
@@ -50,6 +53,12 @@ class ProjectController extends Controller
             $image_path = Storage::put('uploads', $validated['cover_image']);  //IMG MAKER
             $validated['cover_image'] = $image_path;
         }
+
+        //TYPE
+        $validated['type_id'] = Auth::id();
+        //CONNECT Type_id (Foreign Key) to id on User Table
+
+
 
         /* Create */
         Project::create($validated);
