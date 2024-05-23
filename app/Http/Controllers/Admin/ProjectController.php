@@ -28,7 +28,6 @@ class ProjectController extends Controller
     public function create(Project $project)
     {
         $types = Type::all();
-        dd($types);
         return view('admin.portfolio.create', compact('project', 'types'));
     }
 
@@ -47,10 +46,10 @@ class ProjectController extends Controller
         $validated['slug'] = $slug;
 
         //COVER_IMAGE
-        $image_path = Storage::put('uploads', $validated['cover_image']);  //IMG MAKER
-        /* dd($image_path); */
-        $validated['cover_image'] = $image_path;
-        /* dd($validated); */
+        if ($request->has('cover_image')) {
+            $image_path = Storage::put('uploads', $validated['cover_image']);  //IMG MAKER
+            $validated['cover_image'] = $image_path;
+        }
 
         /* Create */
         Project::create($validated);

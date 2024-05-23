@@ -12,9 +12,20 @@
                 <label for="link" class="form-label">cover_image</label>
                 <input type="file" class="form-control  @error('cover_image') is-invalid @enderror" name="cover_image"
                     id="cover_image" aria-describedby="helpId" placeholder="Type a cover_image" />
-                <small id="cover_imageId" class="form-text text-muted">Type a cover_image</small>
+                <small id="cover_imageId" class="form-text text-muted"></small>
             </div>
             @error('cover_image')
+                <h4 class="text-danger ">{{ $message }}</h4>
+            @enderror
+
+            {{-- Type --}}
+            <div class="mb-3 text-light">
+                <label for="type" class="form-label">Type</label>
+                <input type="text" class="form-control  @error('type') is-invalid @enderror" name="type"
+                    id="type" aria-describedby="helpId" placeholder="Type a type" />
+                <small id="typeId" class="form-text text-muted">Type a.... ? Type</small>
+            </div>
+            @error('type')
                 <h4 class="text-danger ">{{ $message }}</h4>
             @enderror
 
