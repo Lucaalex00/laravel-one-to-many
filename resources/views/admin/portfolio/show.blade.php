@@ -18,6 +18,9 @@
     <div class="container d-flex flex-column gap-2 my-4 text-light">
         <h3>Title: {{ $project->title }}</h3>
         <div>Slug: {{ $project->slug }}</div>
+        <div class="type">
+            <strong>Type: </strong> {{ $project->type ? $project->category->name : 'Untyped' }}
+        </div>
 
         <div class="container d-flex align-items-center gap-2 p-0 my-2">
             <img width="300" height="300" src="{{ asset('storage/' . $project->cover_image) }}"

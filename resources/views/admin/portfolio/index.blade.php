@@ -29,22 +29,32 @@
                 <tbody>
                     @forelse ($projects as $project)
                         <tr>
+                            {{-- ID --}}
                             <td class=" text-center">{{ $project->id }}</td>
+
+                            {{-- COVER_IMAGE --}}
                             @if (Str::startsWith($project->cover_image, 'https://'))
-                                <td class=" text-center"><img width="200" height="200"
+                                <td class=" text-center py-3"><img width="200" height="auto"
                                         src="{{ $project->cover_image }}" alt="asd"></td>
                             @else
-                                <td class=" text-center"><img width="200" height="200"
-                                        src="{{ asset('storage/' . $project->cover_image) }}" alt="asd">
+                                <td class="text-center py-3"><img class="border border-warning" width="200"
+                                        height="200" src="{{ asset('storage/' . $project->cover_image) }}" alt="asd">
                                 </td>
                             @endif
 
+                            {{-- TITLE --}}
                             <td class=" text-center shadow">{{ $project->title }}</td>
-                            <td class=" text-center w-25"><a target="_blank"
-                                    class=" text-decoration-none text-warning shadow"
-                                    href="{{ $project->link }}">{{ $project->link }}</a></td>
-                            <td class=" text-center">
-                                <div class="d-flex flex-column gap-3">
+
+                            {{-- LINK --}}
+                            <td class=" text-center w-25">
+                                <a target="_blank" class=" text-decoration-none text-warning shadow"
+                                    href="{{ $project->link }}">{{ $project->link }}
+                                </a>
+                            </td>
+
+                            {{-- CONTROLS --}}
+                            <td class="text-center">
+                                <div class="d-flex flex-column gap-5 py-2">
                                     <a class="btn btn-warning" href="{{ route('admin.portfolio.show', $project) }}">
                                         &RightArrow; View
                                     </a>

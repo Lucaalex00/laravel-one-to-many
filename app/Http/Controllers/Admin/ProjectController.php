@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Type;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
@@ -17,7 +18,8 @@ class ProjectController extends Controller
     public function index()
     {
         /* dd(Project::all()); */
-        return view('admin.portfolio.index', ['projects' => Project::orderByDesc('id')->paginate(8)]);
+
+        return view('admin.portfolio.index', ['projects' => Project::orderByDesc('id')->paginate(8),]);
     }
 
     /**
@@ -25,7 +27,9 @@ class ProjectController extends Controller
      */
     public function create(Project $project)
     {
-        return view('admin.portfolio.create', compact('project'));
+        $types = Type::all();
+        dd($types);
+        return view('admin.portfolio.create', compact('project', 'types'));
     }
 
     /**
@@ -34,11 +38,12 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         /* dd($request->all()); */
+
         /* Validate */
         $validated = $request->validated();
 
         //SLUG
-        $slug = Str::slug($request->slug, '-');
+        $slug = Str::slug($request->title, '-');
         $validated['slug'] = $slug;
 
         //COVER_IMAGE
@@ -60,6 +65,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+
         /* dd($project->all()); */
         return view('admin.portfolio.show', compact('project'));
     }
@@ -69,7 +75,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.portfolio.edit', compact('project'));
+        $types = Type::all();
+
+        return view('admin.portfolio.edit', compact('project', 'types'));
     }
 
     /**
@@ -85,14 +93,14 @@ class ProjectController extends Controller
         $slug = Str::slug($request->slug, '-');
         $validated['slug'] = $slug;
 
-        /*  if ($request->has('cover_image')) {
+        if ($request->has('cover_image')) {
             if ($project->cover_image) {
                 Storage::delete($project->cover_image);
             }
-        } */
-        /* $image_path = Storage::put('uploads', $validated['cover_image']); */ //IMG MAKER
+        }
+        $image_path = Storage::put('uploads', $validated['cover_image']);  //IMG MAKER
         /* dd($image_path); */
-        /* $validated['cover_image'] = $image_path; */
+        $validated['cover_image'] = $image_path;
         /* dd($validated); */
 
 
