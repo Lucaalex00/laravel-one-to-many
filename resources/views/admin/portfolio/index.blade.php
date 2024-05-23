@@ -35,10 +35,11 @@
                             {{-- COVER_IMAGE --}}
                             @if (Str::startsWith($project->cover_image, 'https://'))
                                 <td class=" text-center py-3"><img width="200" height="auto"
-                                        src="{{ $project->cover_image }}" alt="asd"></td>
+                                        src="{{ $project->cover_image }}" alt=" Image N/A"></td>
                             @else
                                 <td class="text-center py-3"><img class="border border-warning" width="200"
-                                        height="200" src="{{ asset('storage/' . $project->cover_image) }}" alt="asd">
+                                        height="200" src="{{ asset('storage/' . $project->cover_image) }}"
+                                        alt=" Image N/A">
                                 </td>
                             @endif
 
